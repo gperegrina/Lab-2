@@ -439,8 +439,28 @@ void deleteBullet(Game *g, Bullet *node)
 void deleteAsteroid(Game *g, Asteroid *node)
 {
 	//remove a node from linked list
-	if (g){}
-	if (node){}
+	if (g){
+	    if (node->prev == NULL) {
+		    if (node->next == NULL) {
+			    g->ahead = NULL;
+		    } else {
+			    node->next->prev = NULL;
+			    g->ahead = node->next;
+		    }
+	    } else {
+		    if (node->next == NULL) {
+			    node->prev->next = NULL;
+		    } else {
+			    node->prev->next = node->next;
+			    node->next->prev = node->prev;
+		    }
+	    }
+	    delete node;
+	    node = NULL;
+	}
+	
+	//if (node){
+	//}
 }
 
 void buildAsteroidFragment(Asteroid *ta, Asteroid *a)
